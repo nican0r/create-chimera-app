@@ -18,6 +18,9 @@ import "src/Counter.sol";
 abstract contract Setup is BaseSetup, ActorManager, AssetManager, Utils {
     Counter counter;
 
+    address constant TEST_1 = address(0x1234);
+    address constant TEST_2 = address(0x5678);
+
     /// === Setup === ///
     /// This contains all calls to be performed in the tester constructor, both for Echidna and Foundry
     function setup() internal virtual override {
@@ -35,13 +38,13 @@ abstract contract Setup is BaseSetup, ActorManager, AssetManager, Utils {
 
     /// === MODIFIERS === ///
     /// Prank admin and actor
-    
-    modifier asAdmin {
+
+    modifier asAdmin() {
         vm.prank(address(this));
         _;
     }
 
-    modifier asActor {
+    modifier asActor() {
         vm.prank(address(_getActor()));
         _;
     }
